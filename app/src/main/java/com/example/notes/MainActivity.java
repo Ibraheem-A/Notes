@@ -15,5 +15,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         sharedPreferences  = getSharedPreferences("Notes", MODE_PRIVATE);
+
+        // List view & Adapter
     }
 }
