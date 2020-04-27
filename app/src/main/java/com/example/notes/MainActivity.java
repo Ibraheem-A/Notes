@@ -21,9 +21,11 @@ public class MainActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(getApplicationContext(), NotesListActivity.class);
-                startActivity(intent);
+                Intent launchListActivity = new Intent(getApplicationContext(), NotesListActivity.class);
+                launchListActivity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                launchListActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(launchListActivity);
             }
-        }, 3000);
+        }, 2000);
     }
 }
