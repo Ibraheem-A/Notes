@@ -39,6 +39,7 @@ public class NotesListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 launchNoteView.putExtra("title", arrayList.get(position));
+                launchNoteView.putExtra("noteText", arrayList.get(position)); // TODO get noteText from SharedPreferences
                 startActivity(launchNoteView);
             }
         });
