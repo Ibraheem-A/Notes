@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -18,6 +19,13 @@ import java.util.List;
 public class NotesListActivity extends AppCompatActivity {
 
     ListView listView;
+    ImageView addNoteView;
+
+    public void onAddClick(View view){
+        addNoteView = (ImageView)view;
+        Intent launchEmptyEditor = new Intent(getApplicationContext(), NoteEditActivity.class);
+        startActivity(launchEmptyEditor);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
