@@ -37,7 +37,8 @@
         app:layout_constraintBottom_toBottomOf="@id/editTitleFrame"
         app:layout_constraintEnd_toEndOf="@id/editTitleFrame"
         app:layout_constraintStart_toStartOf="@id/editTitleFrame"
-        app:layout_constraintTop_toTopOf="@+id/editTitleFrame" />
+        app:layout_constraintTop_toTopOf="@+id/editTitleFrame"
+        android:importantForAutofill="no" />
 
     <FrameLayout
         android:id="@+id/editBodyFrame"
@@ -76,6 +77,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@id/editBodyFrame"
         app:layout_constraintTop_toTopOf="@id/editBodyFrame"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="1.0"
+        android:importantForAutofill="no" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
