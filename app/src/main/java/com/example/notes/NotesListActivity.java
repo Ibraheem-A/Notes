@@ -2,24 +2,29 @@ package com.example.notes;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
+
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class NotesListActivity extends AppCompatActivity {
 
     ListView listView;
     ImageView addNoteView;
+
+    static ArrayList<String> arrayList;
+    static ArrayAdapter arrayAdapter;
+
+    SharedPreferences sharedPreferences;
 
     public void onAddClick(View view){
         addNoteView = (ImageView)view;
@@ -32,14 +37,17 @@ public class NotesListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notes_list);
 
+        sharedPreferences  = getSharedPreferences("Notes", MODE_PRIVATE);
+
+
         // List view & Adapter
         listView = findViewById(R.id.notesListView);
 
-        final ArrayList<String> arrayList = new ArrayList<>();
+        arrayList = new ArrayList<>();
         arrayList.add("Yankee");
         arrayList.add("Upper");
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_selectable_list_item, arrayList);
+        arrayAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_selectable_list_item, arrayList);
         listView.setAdapter(arrayAdapter);
 
         final Intent launchNoteView = new Intent(getApplicationContext(), NoteViewActivity.class);
@@ -47,7 +55,7 @@ public class NotesListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 launchNoteView.putExtra("title", arrayList.get(position));
-                launchNoteView.putExtra("noteText", arrayList.get(position)); // TODO get noteText from SharedPreferences
+                launchNoteView.putExtra("body", arrayList.get(position)); // TODO get noteText from SharedPreferences
                 startActivity(launchNoteView);
             }
         });

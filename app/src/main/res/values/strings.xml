@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">Notes</string>
     <string name="add_button_description">button to add new note</string>
+    <string name="note_Text_Hint">Write something here…</string>
+    <string name="title_hint">Title</string>
 </resources>

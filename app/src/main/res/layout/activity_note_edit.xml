@@ -6,8 +6,41 @@
     android:layout_height="match_parent"
     tools:context=".NoteEditActivity">
 
+    <FrameLayout
+        android:id="@+id/editTitleFrame"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="200dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/border"
+        app:layout_constraintBottom_toTopOf="@id/editNoteFrame"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </FrameLayout>
+
     <EditText
-        android:id="@+id/noteEditText"
+        android:id="@+id/editTitleText"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="2dp"
+        android:background="#00FFFFFF"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="@string/title_hint"
+        app:layout_constraintBottom_toBottomOf="@id/editTitleFrame"
+        app:layout_constraintEnd_toEndOf="@id/editTitleFrame"
+        app:layout_constraintStart_toStartOf="@id/editTitleFrame"
+        app:layout_constraintTop_toTopOf="@+id/editTitleFrame" />
+
+    <FrameLayout
+        android:id="@+id/editNoteFrame"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="10dp"
@@ -15,14 +48,33 @@
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/border"
-        android:ems="10"
-        android:gravity="fill_horizontal"
-        android:inputType="textPersonName"
-        android:singleLine="false"
-        android:textAlignment="gravity"
-        android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+    </FrameLayout>
+
+    <EditText
+        android:id="@+id/noteEditText"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:ems="10"
+        android:gravity="fill_horizontal"
+        android:inputType="text"
+        android:singleLine="false"
+        android:textAlignment="gravity"
+        android:textSize="22sp"
+        android:hint="@string/note_Text_Hint"
+        app:layout_constraintBottom_toBottomOf="@id/editNoteFrame"
+        app:layout_constraintEnd_toEndOf="@id/editNoteFrame"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@id/editNoteFrame"
+        app:layout_constraintTop_toTopOf="@id/editNoteFrame"
+        app:layout_constraintVertical_bias="1.0" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -32,7 +32,7 @@ public class NoteViewActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent launchNoteEditActivity = new Intent(getApplicationContext(), NoteEditActivity.class);
                 launchNoteEditActivity.putExtra("title", currentNote);
-                launchNoteEditActivity.putExtra("noteText", currentNote);
+                launchNoteEditActivity.putExtra("body", currentNote);
                 startActivity(launchNoteEditActivity);
             }
         });
