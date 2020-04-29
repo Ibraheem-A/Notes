@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -31,7 +30,7 @@ public class NoteEditActivity extends AppCompatActivity {
 
         sharedPreferences = getSharedPreferences("Notes", MODE_PRIVATE);
 
-        editBodyTextView = findViewById(R.id.noteEditText);
+        editBodyTextView = findViewById(R.id.bodyEditText);
         editTitleTextView = findViewById(R.id.editTitleText);
 
         Intent intentFromNoteView = getIntent();

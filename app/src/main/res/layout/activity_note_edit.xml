@@ -15,7 +15,7 @@
         android:layout_marginEnd="200dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/border"
-        app:layout_constraintBottom_toTopOf="@id/editNoteFrame"
+        app:layout_constraintBottom_toTopOf="@id/editBodyFrame"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -32,15 +32,15 @@
         android:layout_marginBottom="2dp"
         android:background="#00FFFFFF"
         android:ems="10"
-        android:inputType="text"
         android:hint="@string/title_hint"
+        android:inputType="text"
         app:layout_constraintBottom_toBottomOf="@id/editTitleFrame"
         app:layout_constraintEnd_toEndOf="@id/editTitleFrame"
         app:layout_constraintStart_toStartOf="@id/editTitleFrame"
         app:layout_constraintTop_toTopOf="@+id/editTitleFrame" />
 
     <FrameLayout
-        android:id="@+id/editNoteFrame"
+        android:id="@+id/editBodyFrame"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="10dp"
@@ -56,25 +56,26 @@
     </FrameLayout>
 
     <EditText
-        android:id="@+id/noteEditText"
+        android:id="@+id/bodyEditText"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
+        android:background="#00FFFFFF"
         android:ems="10"
         android:gravity="fill_horizontal"
+        android:hint="@string/note_Text_Hint"
         android:inputType="text"
         android:singleLine="false"
         android:textAlignment="gravity"
         android:textSize="22sp"
-        android:hint="@string/note_Text_Hint"
-        app:layout_constraintBottom_toBottomOf="@id/editNoteFrame"
-        app:layout_constraintEnd_toEndOf="@id/editNoteFrame"
+        app:layout_constraintBottom_toBottomOf="@id/editBodyFrame"
+        app:layout_constraintEnd_toEndOf="@id/editBodyFrame"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@id/editNoteFrame"
-        app:layout_constraintTop_toTopOf="@id/editNoteFrame"
+        app:layout_constraintStart_toStartOf="@id/editBodyFrame"
+        app:layout_constraintTop_toTopOf="@id/editBodyFrame"
         app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

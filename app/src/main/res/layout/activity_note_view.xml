@@ -6,17 +6,65 @@
     android:layout_height="match_parent"
     tools:context=".NoteViewActivity">
 
+    <FrameLayout
+        android:id="@+id/viewTitleFrame"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="200dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/border"
+        app:layout_constraintBottom_toTopOf="@id/viewBodyFrame"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </FrameLayout>
+
     <TextView
-        android:id="@+id/noteTextView"
+        android:id="@+id/titleTextView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="2dp"
+        android:ems="10"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@id/viewTitleFrame"
+        app:layout_constraintEnd_toEndOf="@id/viewTitleFrame"
+        app:layout_constraintStart_toStartOf="@id/viewTitleFrame"
+        app:layout_constraintTop_toTopOf="@id/viewTitleFrame" />
+
+
+    <FrameLayout
+        android:id="@+id/viewBodyFrame"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="60dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:textSize="22sp"
+        android:background="@drawable/border"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/bodyTextView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="@id/viewBodyFrame"
+        app:layout_constraintEnd_toEndOf="@id/viewBodyFrame"
+        app:layout_constraintStart_toStartOf="@id/viewBodyFrame"
+        app:layout_constraintTop_toTopOf="@id/viewBodyFrame" />
 </androidx.constraintlayout.widget.ConstraintLayout>

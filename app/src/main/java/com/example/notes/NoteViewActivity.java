@@ -5,36 +5,51 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ListView;
 import android.widget.TextView;
 
 public class NoteViewActivity extends AppCompatActivity {
 
-    TextView noteTextView;
+    TextView titleTextView;
+    TextView bodyTextView;
 
-    String currentNote;
+    String title;
+    String body;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note_view);
 
-        noteTextView = findViewById(R.id.noteTextView);
+        titleTextView = findViewById(R.id.titleTextView);
+        bodyTextView = findViewById(R.id.bodyTextView);
 
         Intent intentFromNoteList = getIntent();
-        currentNote = intentFromNoteList.getStringExtra("title");
+        title = intentFromNoteList.getStringExtra("title");
+        body = intentFromNoteList.getStringExtra("body");
 
-        noteTextView.setText(currentNote);
+        titleTextView.setText(title);
+        bodyTextView.setText(body);
 
         // new intent for note edit
-        noteTextView.setOnClickListener(new View.OnClickListener() {
+        titleTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent launchNoteEditActivity = new Intent(getApplicationContext(), NoteEditActivity.class);
-                launchNoteEditActivity.putExtra("title", currentNote);
-                launchNoteEditActivity.putExtra("body", currentNote);
-                startActivity(launchNoteEditActivity);
+                launchNoteEditing();
             }
         });
+
+        bodyTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                launchNoteEditing();
+            }
+        });
+    }
+
+    private void launchNoteEditing(){
+        Intent launchNoteEditActivity = new Intent(getApplicationContext(), NoteEditActivity.class);
+        launchNoteEditActivity.putExtra("title", title);
+        launchNoteEditActivity.putExtra("body", title);
+        startActivity(launchNoteEditActivity);
     }
 }
