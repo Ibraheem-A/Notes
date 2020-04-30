@@ -33,7 +33,7 @@
         android:background="#00FFFFFF"
         android:ems="10"
         android:hint="@string/title_hint"
-        android:inputType="text"
+        android:inputType="textMultiLine"
         app:layout_constraintBottom_toBottomOf="@id/editTitleFrame"
         app:layout_constraintEnd_toEndOf="@id/editTitleFrame"
         app:layout_constraintStart_toStartOf="@id/editTitleFrame"
