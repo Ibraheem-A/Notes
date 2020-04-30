@@ -1,6 +1,8 @@
 package com.example.notes;
 
-class NoteText {
+import java.io.Serializable;
+
+class NoteText implements Serializable {
     private String title;
     private String text;
 
