@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -27,6 +28,7 @@ public class NotesListActivity extends AppCompatActivity {
     public void onAddClick(View view){
         addNoteView = (ImageView)view;
         Intent launchEmptyEditor = new Intent(getApplicationContext(), NoteEditActivity.class);
+        launchEmptyEditor.putExtra("noteText", new NoteText("", ""));
         startActivity(launchEmptyEditor);
     }
 
@@ -68,16 +70,21 @@ public class NotesListActivity extends AppCompatActivity {
      * @return ArrayList of the titles of each saved notes
      */
     public static ArrayList<String> getTitlesFromNoteText(ArrayList<NoteText> noteTextArrayList){
+        Log.i("Starting", "getting titles from notes array");
+        Log.i("Size of notes array", Integer.toString(noteTextArrayList.size()));
         ArrayList<String> titlesList = new ArrayList<>();
         if (noteTextArrayList.size() > 0){
             for(int i = 0; i < noteTextArrayList.size(); i++){
                 titlesList.add(noteTextArrayList.get(i).getTitle());
             }
         }
+        Log.i("Note Titles", titlesList.toString());
         return titlesList;
     }
 
     public static NoteText getClickedNoteText(int position){
+        Log.i("Clicked Note Title", noteTextArrayList.get(position).getTitle());
+        Log.i("Clicked Note Body", noteTextArrayList.get(position).getBody());
         return noteTextArrayList.get(position);
     }
 }

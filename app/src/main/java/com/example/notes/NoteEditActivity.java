@@ -21,8 +21,7 @@ public class NoteEditActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        NoteText currentState = getStateOfCurrentNote();
-        saveNoteText(currentState);
+        saveNoteText(noteText);
     }
 
     @Override
@@ -43,12 +42,6 @@ public class NoteEditActivity extends AppCompatActivity {
 
         editTitleTextView.setText(title);
         editBodyTextView.setText(body);
-    }
-
-    private NoteText getStateOfCurrentNote(){
-        String title = editTitleTextView.getText().toString();
-        String body = editTitleTextView.getText().toString();
-        return new NoteText(title, body);
     }
 
     private void saveNoteText(NoteText noteText){
