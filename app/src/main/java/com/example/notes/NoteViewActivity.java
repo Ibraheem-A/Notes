@@ -12,6 +12,8 @@ public class NoteViewActivity extends AppCompatActivity {
     TextView titleTextView;
     TextView bodyTextView;
 
+    NoteText noteText;
+
     String title;
     String body;
 
@@ -24,8 +26,10 @@ public class NoteViewActivity extends AppCompatActivity {
         bodyTextView = findViewById(R.id.bodyTextView);
 
         Intent intentFromNoteList = getIntent();
-        title = intentFromNoteList.getStringExtra("title");
-        body = intentFromNoteList.getStringExtra("body");
+        noteText = (NoteText) intentFromNoteList.getSerializableExtra("noteText");
+        assert noteText != null;
+        title = noteText.getTitle();
+        body = noteText.getBody();
 
         titleTextView.setText(title);
         bodyTextView.setText(body);
@@ -48,8 +52,7 @@ public class NoteViewActivity extends AppCompatActivity {
 
     private void launchNoteEditing(){
         Intent launchNoteEditActivity = new Intent(getApplicationContext(), NoteEditActivity.class);
-        launchNoteEditActivity.putExtra("title", title);
-        launchNoteEditActivity.putExtra("body", title);
+        launchNoteEditActivity.putExtra("title", noteText);
         startActivity(launchNoteEditActivity);
     }
 }

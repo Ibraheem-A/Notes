@@ -14,6 +14,8 @@ public class NoteEditActivity extends AppCompatActivity {
     TextView editBodyTextView;
     TextView editTitleTextView;
 
+    NoteText noteText;
+
     SharedPreferences sharedPreferences;
 
     @Override
@@ -34,13 +36,14 @@ public class NoteEditActivity extends AppCompatActivity {
         editTitleTextView = findViewById(R.id.editTitleText);
 
         Intent intentFromNoteView = getIntent();
-        String title = intentFromNoteView.getStringExtra("title");
-        String body = intentFromNoteView.getStringExtra("body");
+        noteText = (NoteText) intentFromNoteView.getSerializableExtra("noteText");
+        assert noteText != null;
+        String title = noteText.getTitle();
+        String body = noteText.getBody();
 
         editTitleTextView.setText(title);
         editBodyTextView.setText(body);
     }
-
 
     private NoteText getStateOfCurrentNote(){
         String title = editTitleTextView.getText().toString();

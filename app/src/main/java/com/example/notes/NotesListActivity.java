@@ -55,8 +55,7 @@ public class NotesListActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                launchNoteView.putExtra("title", getClickedNoteText(position).getTitle());
-                launchNoteView.putExtra("body", getClickedNoteText(position).getBody());
+                launchNoteView.putExtra("noteText", getClickedNoteText(position));
                 startActivity(launchNoteView);
             }
         });
