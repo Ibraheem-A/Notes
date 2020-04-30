@@ -49,10 +49,11 @@ public class NoteEditActivity extends AppCompatActivity {
     }
 
     private void saveNoteText(NoteText noteText){
-        Gson gson = new Gson();
-        String json = gson.toJson(noteText);
-        sharedPreferences.edit().putString(noteText.getTitle(), json).apply();
-
-        NotesListActivity.arrayAdapter.notifyDataSetChanged();
+        if (!NotesListActivity.noteTextArrayList.contains(noteText)){
+            NotesListActivity.noteTextArrayList.add(0, noteText);
+            NotesListActivity.titleArrayList = NotesListActivity.getTitlesFromNoteText(NotesListActivity.noteTextArrayList);
+            NotesListActivity.arrayAdapter.notifyDataSetChanged();
+            SharedPreferencesManager.saveDataToSharedPreferences(sharedPreferences, NotesListActivity.noteTextArrayList);
+        }
     }
 }
