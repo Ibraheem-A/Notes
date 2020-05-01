@@ -4,8 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.text.Spannable;
+import android.text.method.MovementMethod;
+import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class NoteViewActivity extends AppCompatActivity {
 
@@ -27,12 +35,19 @@ public class NoteViewActivity extends AppCompatActivity {
 
         Intent intentFromNoteList = getIntent();
         noteText = (NoteText) intentFromNoteList.getSerializableExtra("noteText");
+
         assert noteText != null;
         title = noteText.getTitle();
         body = noteText.getBody();
 
+        Log.i("Clicked Note Title", title);
+        Log.i("Clicked Note Body", body);
+
         titleTextView.setText(title);
         bodyTextView.setText(body);
+
+        // set text view to scroll
+        bodyTextView.setMovementMethod(new ScrollingMovementMethod());
 
         // new intent for note edit
         titleTextView.setOnClickListener(new View.OnClickListener() {
@@ -52,7 +67,7 @@ public class NoteViewActivity extends AppCompatActivity {
 
     private void launchNoteEditing(){
         Intent launchNoteEditActivity = new Intent(getApplicationContext(), NoteEditActivity.class);
-        launchNoteEditActivity.putExtra("title", noteText);
+        launchNoteEditActivity.putExtra("noteText", noteText);
         startActivity(launchNoteEditActivity);
     }
 }

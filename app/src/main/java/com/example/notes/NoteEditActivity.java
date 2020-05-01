@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -21,6 +22,10 @@ public class NoteEditActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        Log.i("Action", "Back Pressed in Note Edit");
+
+        commitCurrentNote();
+        Log.i("Saving", noteText.getTitle() + " with body size " + noteText.getBody().length() + " chars");
         saveNoteText(noteText);
     }
 
@@ -31,8 +36,8 @@ public class NoteEditActivity extends AppCompatActivity {
 
         sharedPreferences = getSharedPreferences("Notes", MODE_PRIVATE);
 
-        editBodyTextView = findViewById(R.id.bodyEditText);
         editTitleTextView = findViewById(R.id.editTitleText);
+        editBodyTextView = findViewById(R.id.bodyEditText);
 
         Intent intentFromNoteView = getIntent();
         noteText = (NoteText) intentFromNoteView.getSerializableExtra("noteText");
@@ -40,16 +45,26 @@ public class NoteEditActivity extends AppCompatActivity {
         String title = noteText.getTitle();
         String body = noteText.getBody();
 
+        Log.i("Clicked Note Title", title);
+        Log.i("Clicked Note Body", body);
+
         editTitleTextView.setText(title);
         editBodyTextView.setText(body);
     }
 
+
+    private void commitCurrentNote(){
+        String title = editTitleTextView.getText().toString();
+        String body = editBodyTextView.getText().toString();
+        noteText.setTitle(title);
+        noteText.setBody(body);
+    }
+
     private void saveNoteText(NoteText noteText){
-        if (!NotesListActivity.noteTextArrayList.contains(noteText)){
-            NotesListActivity.noteTextArrayList.add(0, noteText);
-            NotesListActivity.titleArrayList = NotesListActivity.getTitlesFromNoteText(NotesListActivity.noteTextArrayList);
-            NotesListActivity.arrayAdapter.notifyDataSetChanged();
-            SharedPreferencesManager.saveDataToSharedPreferences(sharedPreferences, NotesListActivity.noteTextArrayList);
-        }
+        NotesListActivity.noteTextArrayList.add(0, noteText);
+        NotesListActivity.titleArrayList = NotesListActivity.getTitlesFromNoteText(NotesListActivity.noteTextArrayList);
+        NotesListActivity.arrayAdapter.notifyDataSetChanged();
+        SharedPreferencesManager.saveDataToSharedPreferences(sharedPreferences, NotesListActivity.noteTextArrayList);
+
     }
 }

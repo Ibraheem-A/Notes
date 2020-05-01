@@ -4,11 +4,11 @@ import java.io.Serializable;
 
 class NoteText implements Serializable {
     private String title;
-    private String text;
+    private String body;
 
-    NoteText(String title, String text){
+    NoteText(String title, String body){
         this.title = title;
-        this.text = text;
+        this.body = body;
     }
 
     String getTitle() {
@@ -16,6 +16,14 @@ class NoteText implements Serializable {
     }
 
     String getBody() {
-        return text;
+        return body;
+    }
+
+    void setTitle(String title) {
+        this.title = title;
+    }
+
+    void setBody(String body) {
+        this.body = body;
     }
 }
