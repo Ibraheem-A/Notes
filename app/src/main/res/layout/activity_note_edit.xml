@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/notesEditView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".NoteEditActivity">
@@ -33,12 +34,28 @@
         android:background="#00FFFFFF"
         android:ems="10"
         android:hint="@string/title_hint"
+        android:importantForAutofill="no"
         android:inputType="text"
         app:layout_constraintBottom_toBottomOf="@id/editTitleFrame"
         app:layout_constraintEnd_toEndOf="@id/editTitleFrame"
         app:layout_constraintStart_toStartOf="@id/editTitleFrame"
-        app:layout_constraintTop_toTopOf="@+id/editTitleFrame"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toTopOf="@+id/editTitleFrame" />
+
+    <ImageView
+        android:id="@+id/saveButtonImage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:contentDescription="@string/save_button_description"
+        android:onClick="onSaveClick"
+        app:layout_constraintBottom_toTopOf="@id/editBodyFrame"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/editTitleFrame"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/save_icon" />
 
     <FrameLayout
         android:id="@+id/editBodyFrame"
@@ -53,10 +70,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
     </FrameLayout>
 
     <EditText
-        android:id="@+id/bodyEditText"
+        android:id="@+id/editBodyText"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="10dp"
@@ -67,6 +85,7 @@
         android:ems="10"
         android:gravity="fill_horizontal"
         android:hint="@string/note_Text_Hint"
+        android:importantForAutofill="no"
         android:inputType="textMultiLine"
         android:singleLine="false"
         android:textAlignment="gravity"
@@ -76,7 +95,6 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@id/editBodyFrame"
         app:layout_constraintTop_toTopOf="@id/editBodyFrame"
-        app:layout_constraintVertical_bias="1.0"
-        android:importantForAutofill="no" />
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

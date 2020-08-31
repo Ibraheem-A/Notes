@@ -6,9 +6,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
-
-import com.google.gson.Gson;
 
 public class NoteEditActivity extends AppCompatActivity {
 
@@ -37,7 +36,7 @@ public class NoteEditActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences("Notes", MODE_PRIVATE);
 
         editTitleTextView = findViewById(R.id.editTitleText);
-        editBodyTextView = findViewById(R.id.bodyEditText);
+        editBodyTextView = findViewById(R.id.editBodyText);
 
         Intent intentFromNoteView = getIntent();
         noteText = (NoteText) intentFromNoteView.getSerializableExtra("noteText");
@@ -50,6 +49,10 @@ public class NoteEditActivity extends AppCompatActivity {
 
         editTitleTextView.setText(title);
         editBodyTextView.setText(body);
+    }
+
+    public void onSaveClick(View view){
+        onBackPressed();
     }
 
 
