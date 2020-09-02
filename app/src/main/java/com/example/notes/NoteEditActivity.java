@@ -20,12 +20,8 @@ public class NoteEditActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         Log.i("Action", "Back Pressed in Note Edit");
-
-        commitCurrentNote();
-        Log.i("Saving", noteText.getTitle() + " with body size " + noteText.getBody().length() + " chars");
-        saveNoteText(noteText);
+        saveNoteAndGoToPreviousActivity();
     }
 
     @Override
@@ -51,11 +47,28 @@ public class NoteEditActivity extends AppCompatActivity {
         editBodyTextView.setText(body);
     }
 
+    /**
+     * saves the NoteText object when the save button is pressed 
+     * @param view the ImageView of the save button
+     */
     public void onSaveClick(View view){
-        onBackPressed();
+        Log.i("Action", "Save button pressed in Note Edit");
+        saveNoteAndGoToPreviousActivity();
     }
 
+    /**
+     * saves note and returns to Note List screen
+     */
+    private void saveNoteAndGoToPreviousActivity() {
+        super.onBackPressed();
+        commitCurrentNote();
+        Log.i("Saving", noteText.getTitle() + " with body size " + noteText.getBody().length() + " chars");
+        saveNoteText(noteText);
+    }
 
+    /**
+     * updates the note text with the edited title and body
+     */
     private void commitCurrentNote(){
         String title = editTitleTextView.getText().toString();
         String body = editBodyTextView.getText().toString();
@@ -63,11 +76,14 @@ public class NoteEditActivity extends AppCompatActivity {
         noteText.setBody(body);
     }
 
+    /**
+     * saves the NoteText object in shared preferences
+     * @param noteText the note text object
+     */
     private void saveNoteText(NoteText noteText){
         NotesListActivity.noteTextArrayList.add(0, noteText);
         NotesListActivity.titleArrayList = NotesListActivity.getTitlesFromNoteText(NotesListActivity.noteTextArrayList);
         NotesListActivity.arrayAdapter.notifyDataSetChanged();
         SharedPreferencesManager.saveDataToSharedPreferences(sharedPreferences, NotesListActivity.noteTextArrayList);
-
     }
 }
