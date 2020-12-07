@@ -5,9 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+
+import com.google.gson.Gson;
 
 public class NoteEditActivity extends AppCompatActivity {
 
@@ -45,6 +49,24 @@ public class NoteEditActivity extends AppCompatActivity {
 
         editTitleTextView.setText(title);
         editBodyTextView.setText(body);
+
+        editBodyTextView.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                commitCurrentNote();
+                NotesListActivity.arrayAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     /**
@@ -60,14 +82,14 @@ public class NoteEditActivity extends AppCompatActivity {
      * saves note and returns to Note List screen
      */
     private void saveNoteAndGoToPreviousActivity() {
-        super.onBackPressed();
         commitCurrentNote();
         Log.i("Saving", noteText.getTitle() + " with body size " + noteText.getBody().length() + " chars");
         saveNoteText(noteText);
+//        arrayAdapter.notifyDataSetChanged();
     }
 
     /**
-     * updates the note text with the edited title and body
+     * Creates a note text object with the edited title and body
      */
     private void commitCurrentNote(){
         String title = editTitleTextView.getText().toString();
@@ -81,9 +103,12 @@ public class NoteEditActivity extends AppCompatActivity {
      * @param noteText the note text object
      */
     private void saveNoteText(NoteText noteText){
-        NotesListActivity.noteTextArrayList.add(0, noteText);
-        NotesListActivity.titleArrayList = NotesListActivity.getTitlesFromNoteText(NotesListActivity.noteTextArrayList);
-        NotesListActivity.arrayAdapter.notifyDataSetChanged();
-        SharedPreferencesManager.saveDataToSharedPreferences(sharedPreferences, NotesListActivity.noteTextArrayList);
+        Intent updateSavedNotes = new Intent(getApplicationContext(), NotesListActivity.class);
+        updateSavedNotes.putExtra("editedNoteText", noteText);
+        startActivity(updateSavedNotes);
+//        NotesListActivity.noteTextArrayList.add(0, noteText);
+//        NotesListActivity.titleArrayList = NotesListActivity.getTitlesFromNoteText(NotesListActivity.noteTextArrayList);
+//        arrayAdapter.notifyDataSetChanged();
+//        SharedPreferencesManager.saveDataToSharedPreferences(sharedPreferences, NotesListActivity.noteTextArrayList);
     }
 }

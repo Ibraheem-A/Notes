@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class NotesListActivity extends AppCompatActivity {
@@ -19,9 +20,9 @@ public class NotesListActivity extends AppCompatActivity {
     ListView listView;
     ImageView addNoteView;
 
-    static ArrayList<String> titleArrayList;
-    static ArrayAdapter arrayAdapter;
-    static ArrayList<NoteText> noteTextArrayList;
+    ArrayList<String> titleArrayList;
+    static ArrayAdapter arrayAdapter; // static cuz I needed to use it in another class, might revert
+    ArrayList<NoteText> noteTextArrayList;
 
     SharedPreferences sharedPreferences;
 
@@ -48,28 +49,49 @@ public class NotesListActivity extends AppCompatActivity {
         noteTextArrayList = SharedPreferencesManager.loadDataFromSharedPreferences(sharedPreferences);
 
         titleArrayList = getTitlesFromNoteText(noteTextArrayList);
+        Log.i("title on Create", titleArrayList.toString());
 
         arrayAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_selectable_list_item, titleArrayList);
         listView.setAdapter(arrayAdapter);
 
-        // Intent to launch note view activity
-        final Intent launchNoteView = new Intent(getApplicationContext(), NoteViewActivity.class);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent launchNoteView = new Intent(getApplicationContext(), NoteViewActivity.class);
                 launchNoteView.putExtra("noteText", getClickedNoteText(position));
                 startActivity(launchNoteView);
             }
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        Log.i("title on Resume", titleArrayList.toString());
+        getEditedNoteTextFromIntent();
+    }
 
     /**
-     *
+     * get edited NoteText object from intent
+     * this intent is initialized from NoteEditActivity.java
+     */
+    private void getEditedNoteTextFromIntent(){
+        Intent updateSavedNotes = getIntent();
+        Serializable serializable = updateSavedNotes.getSerializableExtra("editedNoteText");
+        if (serializable != null){
+            NoteText editedNoteText = (NoteText) serializable;
+            noteTextArrayList.add(0, editedNoteText);
+            titleArrayList = getTitlesFromNoteText(noteTextArrayList);
+            arrayAdapter.notifyDataSetChanged();
+        }
+    }
+
+    /**
      * @param noteTextArrayList list of NoteText objects gotten from shared preferences
      * @return ArrayList of the titles of each saved notes
      */
-    public static ArrayList<String> getTitlesFromNoteText(ArrayList<NoteText> noteTextArrayList){
+    public ArrayList<String> getTitlesFromNoteText(ArrayList<NoteText> noteTextArrayList){
         Log.i("Starting", "getting titles from notes array");
         Log.i("Size of notes array", Integer.toString(noteTextArrayList.size()));
         ArrayList<String> titlesList = new ArrayList<>();
@@ -82,7 +104,7 @@ public class NotesListActivity extends AppCompatActivity {
         return titlesList;
     }
 
-    public static NoteText getClickedNoteText(int position){
+    public NoteText getClickedNoteText(int position){
         Log.i("Clicked Note Title", noteTextArrayList.get(position).getTitle());
         Log.i("Clicked Note Body", noteTextArrayList.get(position).getBody());
         return noteTextArrayList.get(position);
