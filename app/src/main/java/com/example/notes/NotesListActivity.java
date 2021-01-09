@@ -21,7 +21,7 @@ public class NotesListActivity extends AppCompatActivity {
     ImageView addNoteView;
 
     ArrayList<String> titleArrayList;
-    static ArrayAdapter arrayAdapter; // static cuz I needed to use it in another class, might revert
+    ArrayAdapter arrayAdapter;
     ArrayList<NoteText> noteTextArrayList;
 
     SharedPreferences sharedPreferences;
@@ -57,7 +57,7 @@ public class NotesListActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent launchNoteView = new Intent(getApplicationContext(), NoteViewActivity.class);
+                Intent launchNoteView = new Intent(getApplicationContext(), NoteEditActivity.class);
                 launchNoteView.putExtra("noteText", getClickedNoteText(position));
                 startActivity(launchNoteView);
             }
@@ -81,10 +81,14 @@ public class NotesListActivity extends AppCompatActivity {
         Serializable serializable = updateSavedNotes.getSerializableExtra("editedNoteText");
         if (serializable != null){
             NoteText editedNoteText = (NoteText) serializable;
-            noteTextArrayList.add(0, editedNoteText);
-            titleArrayList = getTitlesFromNoteText(noteTextArrayList);
+            updateNoteTextAndTitleArray(editedNoteText);
             arrayAdapter.notifyDataSetChanged();
         }
+    }
+
+    public void updateNoteTextAndTitleArray(NoteText editedNoteText) {
+        noteTextArrayList.add(0, editedNoteText);
+        titleArrayList = getTitlesFromNoteText(noteTextArrayList);
     }
 
     /**

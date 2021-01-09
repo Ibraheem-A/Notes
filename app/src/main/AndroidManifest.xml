@@ -10,7 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".NoteEditActivity"></activity>
-        <activity android:name=".NoteViewActivity" />
         <activity android:name=".NotesListActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

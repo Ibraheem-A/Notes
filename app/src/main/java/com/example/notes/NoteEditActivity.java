@@ -11,7 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
+
 
 public class NoteEditActivity extends AppCompatActivity {
 
@@ -21,6 +21,8 @@ public class NoteEditActivity extends AppCompatActivity {
     NoteText noteText;
 
     SharedPreferences sharedPreferences;
+
+    final NotesListActivity notesListActivity = new NotesListActivity();
 
     @Override
     public void onBackPressed() {
@@ -59,12 +61,13 @@ public class NoteEditActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 commitCurrentNote();
-                NotesListActivity.arrayAdapter.notifyDataSetChanged();
+
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                notesListActivity.updateNoteTextAndTitleArray(noteText);
+                notesListActivity.arrayAdapter.notifyDataSetChanged();
             }
         });
     }
@@ -92,6 +95,7 @@ public class NoteEditActivity extends AppCompatActivity {
      * Creates a note text object with the edited title and body
      */
     private void commitCurrentNote(){
+        Log.i("Commit", noteText.getTitle() + " with body size " + noteText.getBody().length() + " chars");
         String title = editTitleTextView.getText().toString();
         String body = editBodyTextView.getText().toString();
         noteText.setTitle(title);
