@@ -42,11 +42,8 @@ public class NotesListActivity extends AppCompatActivity {
 
         sharedPreferences = getSharedPreferences("Notes", MODE_PRIVATE);
 
-        // clear ArrayLists to refresh this activity
-//        if(!noteTextArrayList.equals(null) && !noteTextArrayList.isEmpty()){ noteTextArrayList.clear();}
-//        if(!titleArrayList.isEmpty()){ titleArrayList.clear();}
-
         noteTextArrayList = SharedPreferencesManager.loadDataFromSharedPreferences(sharedPreferences);
+
 
         titleArrayList = getTitlesFromNoteText(noteTextArrayList);
         Log.i("title on Create", titleArrayList.toString());
@@ -64,30 +61,14 @@ public class NotesListActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        Log.i("title on Resume", titleArrayList.toString());
-        getEditedNoteTextFromIntent();
-    }
-
-    /**
-     * get edited NoteText object from intent
-     * this intent is initialized from NoteEditActivity.java
-     */
-    private void getEditedNoteTextFromIntent(){
-        Intent updateSavedNotes = getIntent();
-        Serializable serializable = updateSavedNotes.getSerializableExtra("editedNoteText");
-        if (serializable != null){
-            NoteText editedNoteText = (NoteText) serializable;
-            updateNoteTextAndTitleArray(editedNoteText);
-            arrayAdapter.notifyDataSetChanged();
-        }
-    }
-
     public static void updateNoteTextAndTitleArray(NoteText editedNoteText) {
-        noteTextArrayList.add(0, editedNoteText);
+        if (!noteTextArrayList.contains(editedNoteText)) {
+            noteTextArrayList.add(0, editedNoteText);
+        } else {
+            noteTextArrayList.remove(editedNoteText);
+            noteTextArrayList.add(0, editedNoteText);
+        }
+
         titleArrayList = getTitlesFromNoteText(noteTextArrayList);
     }
 

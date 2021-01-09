@@ -22,13 +22,6 @@ public class NoteEditActivity extends AppCompatActivity {
 
     SharedPreferences sharedPreferences;
 
-
-//    @Override
-//    public void onBackPressed() {
-//        Log.i("Action", "Back Pressed in Note Edit");
-//        saveNoteAndGoToPreviousActivity();
-//    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +55,7 @@ public class NoteEditActivity extends AppCompatActivity {
                 commitCurrentNote();
                 NotesListActivity.updateNoteTextAndTitleArray(noteText);
                 NotesListActivity.arrayAdapter.notifyDataSetChanged();
+                SharedPreferencesManager.saveDataToSharedPreferences(sharedPreferences, NotesListActivity.noteTextArrayList);
             }
 
             @Override
@@ -69,6 +63,8 @@ public class NoteEditActivity extends AppCompatActivity {
 
             }
         });
+
+
     }
 
     /**
@@ -78,9 +74,6 @@ public class NoteEditActivity extends AppCompatActivity {
     public void onSaveClick(View view){
         Log.i("Action", "Save button pressed in Note Edit");
         saveNoteAndGoToPreviousActivity();
-
-        // return to previous screen
-        // open NoteEditActivity
     }
 
 
@@ -90,8 +83,8 @@ public class NoteEditActivity extends AppCompatActivity {
     private void saveNoteAndGoToPreviousActivity() {
         commitCurrentNote();
         Log.i("Saving", noteText.getTitle() + " with body size " + noteText.getBody().length() + " chars");
-        saveNoteText(noteText);
-//        arrayAdapter.notifyDataSetChanged();
+        Intent updateSavedNotes = new Intent(getApplicationContext(), NotesListActivity.class);
+        startActivity(updateSavedNotes);
     }
 
     /**
@@ -105,17 +98,4 @@ public class NoteEditActivity extends AppCompatActivity {
         noteText.setBody(body);
     }
 
-    /**
-     * saves the NoteText object in shared preferences
-     * @param noteText the note text object
-     */
-    private void saveNoteText(NoteText noteText){
-        Intent updateSavedNotes = new Intent(getApplicationContext(), NotesListActivity.class);
-        updateSavedNotes.putExtra("editedNoteText", noteText);
-        startActivity(updateSavedNotes);
-//        NotesListActivity.noteTextArrayList.add(0, noteText);
-//        NotesListActivity.titleArrayList = NotesListActivity.getTitlesFromNoteText(NotesListActivity.noteTextArrayList);
-//        arrayAdapter.notifyDataSetChanged();
-//        SharedPreferencesManager.saveDataToSharedPreferences(sharedPreferences, NotesListActivity.noteTextArrayList);
-    }
 }
