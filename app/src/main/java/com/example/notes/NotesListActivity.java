@@ -20,9 +20,9 @@ public class NotesListActivity extends AppCompatActivity {
     ListView listView;
     ImageView addNoteView;
 
-    ArrayList<String> titleArrayList;
-    ArrayAdapter arrayAdapter;
-    ArrayList<NoteText> noteTextArrayList;
+    static ArrayList<String> titleArrayList;
+    static ArrayAdapter arrayAdapter;
+    static ArrayList<NoteText> noteTextArrayList;
 
     SharedPreferences sharedPreferences;
 
@@ -86,7 +86,7 @@ public class NotesListActivity extends AppCompatActivity {
         }
     }
 
-    public void updateNoteTextAndTitleArray(NoteText editedNoteText) {
+    public static void updateNoteTextAndTitleArray(NoteText editedNoteText) {
         noteTextArrayList.add(0, editedNoteText);
         titleArrayList = getTitlesFromNoteText(noteTextArrayList);
     }
@@ -95,7 +95,7 @@ public class NotesListActivity extends AppCompatActivity {
      * @param noteTextArrayList list of NoteText objects gotten from shared preferences
      * @return ArrayList of the titles of each saved notes
      */
-    public ArrayList<String> getTitlesFromNoteText(ArrayList<NoteText> noteTextArrayList){
+    public static ArrayList<String> getTitlesFromNoteText(ArrayList<NoteText> noteTextArrayList){
         Log.i("Starting", "getting titles from notes array");
         Log.i("Size of notes array", Integer.toString(noteTextArrayList.size()));
         ArrayList<String> titlesList = new ArrayList<>();

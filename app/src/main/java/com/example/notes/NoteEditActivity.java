@@ -22,13 +22,12 @@ public class NoteEditActivity extends AppCompatActivity {
 
     SharedPreferences sharedPreferences;
 
-    final NotesListActivity notesListActivity = new NotesListActivity();
 
-    @Override
-    public void onBackPressed() {
-        Log.i("Action", "Back Pressed in Note Edit");
-        saveNoteAndGoToPreviousActivity();
-    }
+//    @Override
+//    public void onBackPressed() {
+//        Log.i("Action", "Back Pressed in Note Edit");
+//        saveNoteAndGoToPreviousActivity();
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,13 +60,13 @@ public class NoteEditActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 commitCurrentNote();
-
+                NotesListActivity.updateNoteTextAndTitleArray(noteText);
+                NotesListActivity.arrayAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                notesListActivity.updateNoteTextAndTitleArray(noteText);
-                notesListActivity.arrayAdapter.notifyDataSetChanged();
+
             }
         });
     }
@@ -79,7 +78,11 @@ public class NoteEditActivity extends AppCompatActivity {
     public void onSaveClick(View view){
         Log.i("Action", "Save button pressed in Note Edit");
         saveNoteAndGoToPreviousActivity();
+
+        // return to previous screen
+        // open NoteEditActivity
     }
+
 
     /**
      * saves note and returns to Note List screen
