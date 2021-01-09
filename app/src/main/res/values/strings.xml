@@ -4,4 +4,5 @@
     <string name="save_button_description">button to save note</string>
     <string name="note_Text_Hint">Write something here…</string>
     <string name="title_hint">Title</string>
+    <string name="add_note">Add Note</string>
 </resources>
