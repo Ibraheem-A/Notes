@@ -70,6 +70,7 @@ public class NotesListActivity extends AppCompatActivity {
                                 noteTextArrayList.remove(position);
                                 titleArrayList.remove(position);
                                 arrayAdapter.notifyDataSetChanged();
+                                SharedPreferencesManager.saveDataToSharedPreferences(sharedPreferences, noteTextArrayList);
                             }
                         })
                         .setNegativeButton("No", null)
