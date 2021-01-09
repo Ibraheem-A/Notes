@@ -52,6 +52,9 @@ public class NoteEditActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (NotesListActivity.noteTextArrayList.contains(NotesListActivity.clickedNoteText)){
+                    NotesListActivity.noteTextArrayList.remove(NotesListActivity.clickedNoteText);
+                }
                 commitCurrentNote();
                 NotesListActivity.updateNoteTextAndTitleArray(noteText);
                 NotesListActivity.arrayAdapter.notifyDataSetChanged();

@@ -20,6 +20,7 @@ public class NotesListActivity extends AppCompatActivity {
     ListView listView;
     ImageView addNoteView;
 
+    static NoteText clickedNoteText;
     static ArrayList<String> titleArrayList;
     static ArrayAdapter arrayAdapter;
     static ArrayList<NoteText> noteTextArrayList;
@@ -55,7 +56,7 @@ public class NotesListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent launchNoteView = new Intent(getApplicationContext(), NoteEditActivity.class);
-                launchNoteView.putExtra("noteText", getClickedNoteText(position));
+                launchNoteView.putExtra("noteText", clickedNoteText = getClickedNoteText(position));
                 startActivity(launchNoteView);
             }
         });
