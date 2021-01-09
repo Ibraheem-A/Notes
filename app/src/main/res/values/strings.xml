@@ -5,4 +5,8 @@
     <string name="note_Text_Hint">Write something here…</string>
     <string name="title_hint">Title</string>
     <string name="add_note">Add Note</string>
+    <string name="version_number">v 1.0</string>
+    <string name="developer_name">by Oluwa_Single</string>
+    <string name="app_logo">App Logo</string>
+
 </resources>
