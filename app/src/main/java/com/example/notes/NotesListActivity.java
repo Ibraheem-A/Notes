@@ -1,11 +1,16 @@
 package com.example.notes;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,7 +23,7 @@ import java.util.ArrayList;
 public class NotesListActivity extends AppCompatActivity {
 
     ListView listView;
-    ImageView addNoteView;
+//    ImageView addNoteView;
 
     static NoteText clickedNoteText;
     static ArrayList<String> titleArrayList;
@@ -27,12 +32,12 @@ public class NotesListActivity extends AppCompatActivity {
 
     SharedPreferences sharedPreferences;
 
-    public void onAddClick(View view){
-        addNoteView = (ImageView)view;
-        Intent launchEmptyEditor = new Intent(getApplicationContext(), NoteEditActivity.class);
-        launchEmptyEditor.putExtra("noteText", new NoteText("", ""));
-        startActivity(launchEmptyEditor);
-    }
+//    public void onAddClick(View view){
+//        addNoteView = (ImageView)view;
+//        Intent launchEmptyEditor = new Intent(getApplicationContext(), NoteEditActivity.class);
+//        launchEmptyEditor.putExtra("noteText", new NoteText("", ""));
+//        startActivity(launchEmptyEditor);
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +65,29 @@ public class NotesListActivity extends AppCompatActivity {
                 startActivity(launchNoteView);
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.add_note_menu, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        super.onOptionsItemSelected(item);
+
+        if (item.getItemId() == R.id.add_note){
+            Intent launchEmptyEditor = new Intent(getApplicationContext(), NoteEditActivity.class);
+            launchEmptyEditor.putExtra("noteText", new NoteText("", ""));
+            startActivity(launchEmptyEditor);
+
+            return true;
+        }
+
+        return false;
     }
 
     public static void updateNoteTextAndTitleArray(NoteText editedNoteText) {
